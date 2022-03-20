@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Administrar Signos Vitales</h1>
+<form class="example-container" [formGroup]="form" (ngSubmit)="enviar()" #espForm="ngForm">
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <mat-select placeholder="Selecciona paciente" formControlName="paciente" [(ngModel)]="paciente" [compareWith]="compareObjects">
+            <mat-option *ngFor="let p of pacientes" [value]="p">
+                {{p.nombres}} {{p.apellidos}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" readonly>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Temperatura" required formControlName="temperatura">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulso" required formControlName="pulso">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo Respiratorio" required formControlName="ritmo">
+    </mat-form-field>
+
+    <div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="espForm.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+        &nbsp;&nbsp;
+        <button mat-raised-button mat-dialog-close color="accent" type="button">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+    </div>
+</form>
